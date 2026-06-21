@@ -8,21 +8,12 @@ if [ -z "$host" ]; then
 fi
 
 root=$(cd "$(dirname "$0")/.." && pwd)
-archive=/tmp/arcanbar-ssh-smoke.tgz
 remote=/tmp/arcanbar-ssh-smoke
-stage=/tmp/arcanbar-ssh-smoke-stage
 
-rm -rf "$stage"
-mkdir -p "$stage/arcanbar" "$stage/polybar-upstream"
-git -C "$root" archive HEAD | tar -C "$stage/arcanbar" -xf -
-git -C "$(dirname "$root")/polybar-upstream" archive HEAD | tar -C "$stage/polybar-upstream" -xf -
-tar -C "$stage" -czf "$archive" arcanbar polybar-upstream
-
-scp -q "$archive" "$host:$archive"
+ssh -o BatchMode=yes -o ConnectTimeout=8 "$host" "rm -rf '$remote' && mkdir -p '$remote'"
+rsync -a --delete --exclude .git --exclude '._*' "$root/" "$host:$remote/arcanbar/"
+rsync -a --delete --exclude .git --exclude '._*' "$(dirname "$root")/polybar-upstream/" "$host:$remote/polybar-upstream/"
 ssh -o BatchMode=yes -o ConnectTimeout=8 "$host" "
-	rm -rf '$remote' &&
-	mkdir '$remote' &&
-	tar -C '$remote' -xzf '$archive' &&
 	cd '$remote/arcanbar' &&
 	sh ci.sh &&
 	./bin/arcanbar-status &&
