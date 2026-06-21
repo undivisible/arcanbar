@@ -1,10 +1,11 @@
 #!/bin/sh
 set -eu
 cd "$(dirname "$0")/.."
+polybar=${POLYBAR_UPSTREAM:-../polybar-upstream}
 
-test -f ../polybar-upstream/src/components/controller.cpp
-test -f ../polybar-upstream/src/modules/cpu.cpp
-test -f ../polybar-upstream/src/modules/date.cpp
+test -f "$polybar/src/components/controller.cpp"
+test -f "$polybar/src/modules/cpu.cpp"
+test -f "$polybar/src/modules/date.cpp"
 test -f appls/arcanbar/arcanbar.lua
 test -x bin/arcanbar-status
 
