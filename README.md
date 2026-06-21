@@ -1,0 +1,27 @@
+# arcanbar
+
+Polybar-shaped status surface for Arcan.
+
+This is a fresh port target, not a C++ fork. Polybar stays cloned at `../polybar-upstream` as reference. Arcanbar keeps the useful model: small modules produce text, one bar surface renders it, actions stay external.
+
+## Run
+
+```sh
+ARCANBAR_STATUS=/tmp/arcanbar.status arcan -T appls -p resources arcanbar
+```
+
+Feed it:
+
+```sh
+bin/arcanbar-status > /tmp/arcanbar.status
+```
+
+## Shape
+
+- `appls/arcanbar/arcanbar.lua`: Arcan appl.
+- `bin/arcanbar-status`: Polybar-equivalent module collector.
+- `tests/status.sh`: smallest runnable check.
+
+## Polybar Reference
+
+Polybar has X11-specific bar, tray, IPC, and window modules. Arcanbar keeps module output and drops X11 ownership. Arcan owns display, input, and client integration.

@@ -1,0 +1,10 @@
+#!/bin/sh
+if command -v alpenglowed >/dev/null 2>&1; then
+	exec alpenglowed --polybar
+fi
+
+mode=${ARCANBAR_MODE:-arcan}
+clock=$(date +%H:%M)
+load=$(awk '{print $1}' /proc/loadavg 2>/dev/null || printf '-')
+
+printf 'alpenglowed %s load %s %s\n' "$mode" "$load" "$clock"
