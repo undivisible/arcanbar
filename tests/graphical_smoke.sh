@@ -18,11 +18,15 @@ fi
 status=${ARCANBAR_STATUS:-/tmp/arcanbar.status}
 bin/arcanbar-status > "$status"
 
+script_path=${ARCANBAR_SCRIPT_PATH:-/tmp/arcan-src/data/scripts}
+resource_path=${ARCANBAR_RESOURCE_PATH:-/tmp/arcan-src/data/resources}
+bin_path=${ARCANBAR_BIN_PATH:-$(dirname "$runtime")}
+
 timeout=${ARCANBAR_SMOKE_TIMEOUT:-3}
 if command -v timeout >/dev/null 2>&1; then
-	timeout "$timeout" "$runtime" -T appls -p resources arcanbar || code=$?
+	timeout "$timeout" "$runtime" -B "$bin_path" -t appls -T "$script_path" -p "$resource_path" arcanbar || code=$?
 else
-	"$runtime" -T appls -p resources arcanbar &
+	"$runtime" -B "$bin_path" -t appls -T "$script_path" -p "$resource_path" arcanbar &
 	pid=$!
 	sleep "$timeout"
 	kill "$pid" 2>/dev/null || true

@@ -7,7 +7,7 @@ This is a fresh port target, not a C++ fork. Polybar stays cloned at `../polybar
 ## Run
 
 ```sh
-ARCANBAR_STATUS=/tmp/arcanbar.status arcan -T appls -p resources arcanbar
+arcan -t appls -T /path/to/arcan/data/scripts -p /path/to/arcan/data/resources arcanbar
 ```
 
 Feed it:
@@ -26,6 +26,10 @@ bin/arcanbar-status > /tmp/arcanbar.status
 
 Polybar has X11-specific bar, tray, IPC, and window modules. Arcanbar keeps module output and drops X11 ownership. Arcan owns display, input, and client integration.
 
+## Screenshot
+
+![Arcanbar running through Arcan SDL in Xvfb](docs/arcanbar-arcan-xvfb.png)
+
 ## Smoke
 
 ```sh
@@ -39,6 +43,7 @@ Optional graphical smoke:
 ```sh
 tests/graphical_smoke.sh
 tests/ssh_smoke.sh undivisible@192.168.4.134
+tests/screenshot_smoke.sh undivisible@192.168.4.134 docs/arcanbar-arcan-xvfb.png
 ```
 
 `graphical_smoke.sh` exits `77` when no `arcan` or `arcan_headless` runtime is installed.

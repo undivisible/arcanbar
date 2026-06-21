@@ -18,5 +18,5 @@ ssh -o BatchMode=yes -o ConnectTimeout=8 "$host" "
 	sh ci.sh &&
 	./bin/arcanbar-status &&
 	ARCANBAR_MODE=parity ./bin/arcanbar-status &&
-	sh tests/graphical_smoke.sh
+	ARCANBAR_ARCAN='${ARCANBAR_REMOTE_ARCAN:-}' sh tests/graphical_smoke.sh
 "

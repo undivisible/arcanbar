@@ -2,19 +2,10 @@ local state = {
 	bg = nil,
 	text = nil,
 	last = "",
-	path = os.getenv("ARCANBAR_STATUS") or "/tmp/arcanbar.status",
 }
 
 local function read_status()
-	local file = io.open(state.path, "r")
-	if file then
-		local value = file:read("*l") or ""
-		file:close()
-		if value ~= "" then
-			return value
-		end
-	end
-	return "alpenglowed arcan " .. os.date("%H:%M")
+	return "alpenglowed arcanbar"
 end
 
 local function remove_text()
