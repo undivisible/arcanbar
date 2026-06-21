@@ -25,3 +25,11 @@ bin/arcanbar-status > /tmp/arcanbar.status
 ## Polybar Reference
 
 Polybar has X11-specific bar, tray, IPC, and window modules. Arcanbar keeps module output and drops X11 ownership. Arcan owns display, input, and client integration.
+
+## Smoke
+
+```sh
+./ci.sh
+```
+
+This checks the Polybar reference clone, module output, and Arcan Lua surface calls.
