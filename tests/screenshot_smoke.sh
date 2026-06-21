@@ -7,12 +7,13 @@ if [ -z "$host" ]; then
 	exit 64
 fi
 
-output=${2:-docs/arcanbar-arcan-xvfb.png}
+output=${2:-/tmp/arcanbar-arcan-xvfb.png}
 
 ssh -o BatchMode=yes -o ConnectTimeout=8 "$host" "
 	set -eu
 	cd /tmp/arcanbar-ssh-smoke/arcanbar
 	rm -f /tmp/arcanbar.png /tmp/arcanbar-sdl.log /tmp/ffmpeg-x11.log /tmp/xvfb.log
+	./bin/arcanbar-status >/tmp/arcan-src/data/resources/arcanbar.status
 	Xvfb :88 -screen 0 800x120x24 >/tmp/xvfb.log 2>&1 &
 	xvfb=\$!
 	sleep 1

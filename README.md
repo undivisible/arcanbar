@@ -13,7 +13,7 @@ arcan -t appls -T /path/to/arcan/data/scripts -p /path/to/arcan/data/resources a
 Feed it:
 
 ```sh
-bin/arcanbar-status > /tmp/arcanbar.status
+bin/arcanbar-status > /path/to/arcan/data/resources/arcanbar.status
 ```
 
 ## Shape
@@ -28,7 +28,7 @@ Polybar has X11-specific bar, tray, IPC, and window modules. Arcanbar keeps modu
 
 ## Screenshot
 
-![Arcanbar running through Arcan SDL in Xvfb](docs/arcanbar-arcan-xvfb.png)
+Generated screenshots are local smoke artifacts and are not committed.
 
 ## Smoke
 
@@ -43,7 +43,7 @@ Optional graphical smoke:
 ```sh
 tests/graphical_smoke.sh
 tests/ssh_smoke.sh undivisible@192.168.4.134
-tests/screenshot_smoke.sh undivisible@192.168.4.134 docs/arcanbar-arcan-xvfb.png
+tests/screenshot_smoke.sh undivisible@192.168.4.134 /tmp/arcanbar-arcan-xvfb.png
 ```
 
 `graphical_smoke.sh` exits `77` when no `arcan` or `arcan_headless` runtime is installed.

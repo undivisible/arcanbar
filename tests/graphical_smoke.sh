@@ -15,12 +15,10 @@ if [ -z "$runtime" ]; then
 	fi
 fi
 
-status=${ARCANBAR_STATUS:-/tmp/arcanbar.status}
-bin/arcanbar-status > "$status"
-
 script_path=${ARCANBAR_SCRIPT_PATH:-/tmp/arcan-src/data/scripts}
 resource_path=${ARCANBAR_RESOURCE_PATH:-/tmp/arcan-src/data/resources}
 bin_path=${ARCANBAR_BIN_PATH:-$(dirname "$runtime")}
+bin/arcanbar-status > "$resource_path/arcanbar.status"
 
 timeout=${ARCANBAR_SMOKE_TIMEOUT:-3}
 if command -v timeout >/dev/null 2>&1; then

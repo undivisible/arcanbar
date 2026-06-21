@@ -9,20 +9,23 @@ local bg_order = 65534
 local text_order = 65535
 local bg_color = { 18, 18, 18 }
 local text_style = "\\ffonts/default.ttf,14\\#f2f2f2"
-local status_path = os.getenv("ARCANBAR_STATUS") or "/tmp/arcanbar.status"
+local status_resource = "arcanbar.status"
 
 local function trim_line(value)
 	return (value:gsub("[\r\n]+$", ""))
 end
 
-local function read_file_status()
-	local file = io.open(status_path, "r")
-	if not file then
+local function read_resource_status()
+	if not open_rawresource or not read_rawresource then
 		return nil
 	end
 
-	local value = file:read("*l")
-	file:close()
+	if not open_rawresource(status_resource) then
+		return nil
+	end
+
+	local value = read_rawresource()
+	close_rawresource()
 
 	if value and value ~= "" then
 		return trim_line(value)
@@ -31,25 +34,8 @@ local function read_file_status()
 	return nil
 end
 
-local function generated_status()
-	local command = os.getenv("ARCANBAR_STATUS_COMMAND") or "bin/arcanbar-status"
-	local pipe = io.popen(command)
-	if not pipe then
-		return "arcanbar unavailable"
-	end
-
-	local value = pipe:read("*l")
-	pipe:close()
-
-	if value and value ~= "" then
-		return trim_line(value)
-	end
-
-	return "arcanbar unavailable"
-end
-
 local function read_status()
-	return read_file_status() or generated_status()
+	return read_resource_status() or "alpenglowed arcanbar"
 end
 
 local function remove_text()
