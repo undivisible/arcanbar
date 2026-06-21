@@ -1,0 +1,6 @@
+.DS_Store
+*.log
+*.luac
+*.tmp
+/tmp/
+/arcanbar.status
