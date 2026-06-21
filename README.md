@@ -33,3 +33,12 @@ Polybar has X11-specific bar, tray, IPC, and window modules. Arcanbar keeps modu
 ```
 
 This checks the Polybar reference clone, module output, and Arcan Lua surface calls.
+
+Optional graphical smoke:
+
+```sh
+tests/graphical_smoke.sh
+tests/ssh_smoke.sh undivisible@192.168.4.134
+```
+
+`graphical_smoke.sh` exits `77` when no `arcan` or `arcan_headless` runtime is installed.
