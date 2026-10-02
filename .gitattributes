@@ -1,2 +1,6 @@
 *.sh linguist-vendored
 bin/* linguist-vendored
+
+# Exclude Shell from GitHub language statistics.
+*.sh linguist-detectable=false
+/bin/arcanbar-status linguist-detectable=false
